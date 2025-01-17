@@ -193,7 +193,10 @@ class LOC implements RdataInterface
             $h = ($decimal < 0) ? 'W' : 'E';
         }
 
-        return sprintf('%d %d %.3f %s', $d, $m, $s, $h);
+        $locale = setlocale(LC_NUMERIC, 'en_IN');
+        $sprintf = sprintf('%d %d %.3f %s', $d, $m, $s, $h);
+        setlocale(LC_NUMERIC, $locale);
+        return $sprintf;
     }
 
     public function toWire(): string
